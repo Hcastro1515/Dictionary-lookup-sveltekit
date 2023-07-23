@@ -74,6 +74,9 @@
 </script>
 
 <section>
+	<header class=" mx-auto my-10 flex items-center justify-between">
+		<span class="material-symbols-outlined"> library_books </span>
+	</header>
 	<form action="" on:submit|preventDefault={getWordDefinition}>
 		<div class="bg-gray-400 flex justify-between items-center rounded-lg relative">
 			<input
@@ -92,80 +95,86 @@
 		</div>
 	</form>
 
-	<div class="mt-9 relative">
-		{#if dictionaryEntry}
-			{#each dictionaryEntry as entry}
-				{#if entry.phonetics[0].audio}
-					<div
-						class="absolute right-3 top-3 bg-purple-300 grid place-items-center p-5 rounded-full cursor-pointer"
-					>
-						{#if isPlaying}
-							<span
-								class="material-symbols-outlined"
-								role="button"
-								tabindex="1"
-								aria-label="Pause audio"
-								on:click={pauseAudio}
-								on:keydown={(event) => event.key === 'Enter' && pauseAudio()}
-							>
-								pause
-							</span>
-						{:else}
-							<span
-								role="button"
-								on:click={playAudio}
-								tabindex="0"
-								on:keydown={(event) => event.key === 'Enter' && playAudio()}
-								aria-label="word definition"
-								class="material-symbols-outlined"
-							>
-								play_arrow
-							</span>
-						{/if}
-						<audio bind:this={audioElement}>
-							<source src={entry.phonetics[0].audio} />
-						</audio>
-					</div>
-				{/if}
-				<h1 class="text-5xl font-semibold first-letter:uppercase">{entry.word}</h1>
-				<p class="text-purple-500 mt-4 font-semibold">{entry.phonetic}</p>
-
-				{#each entry.meanings as meanings}
-					<Customhr word={meanings.partOfSpeech} />
-					<div class="mt-8">
-						<h5 class="font-light text-gray-800 dark:text-white mb-3">Meaning</h5>
-						<ul class="list-inside list-disc ml-5 w-10/12 space-y-2">
-							{#each meanings.definitions as definitions}
-								<li class="text-clip">{definitions.definition}</li>
-							{/each}
-						</ul>
-
-						<p class="font-light text-gray-800 dark:text-white mb-3 mt-10">
-							Synonyms
-							{#if meanings.synonyms}
-								<span class="text-purple-500 ml-10 first-letter:uppercase font-semibold"
-									>{meanings.synonyms}</span
+	{#if isLoading}
+		<p>Loading</p>
+	{:else if error}
+		<p>Thre was an error with your search!</p>
+	{:else}
+		<div class="mt-9 relative">
+			{#if dictionaryEntry}
+				{#each dictionaryEntry as entry}
+					{#if entry.phonetics[0].audio}
+						<div
+							class="absolute right-3 top-3 bg-purple-300 grid place-items-center p-5 rounded-full cursor-pointer"
+						>
+							{#if isPlaying}
+								<span
+									class="material-symbols-outlined"
+									role="button"
+									tabindex="1"
+									aria-label="Pause audio"
+									on:click={pauseAudio}
+									on:keydown={(event) => event.key === 'Enter' && pauseAudio()}
 								>
+									pause
+								</span>
+							{:else}
+								<span
+									role="button"
+									on:click={playAudio}
+									tabindex="0"
+									on:keydown={(event) => event.key === 'Enter' && playAudio()}
+									aria-label="word definition"
+									class="material-symbols-outlined"
+								>
+									play_arrow
+								</span>
 							{/if}
-						</p>
-					</div>
-				{/each}
+							<audio bind:this={audioElement}>
+								<source src={entry.phonetics[0].audio} />
+							</audio>
+						</div>
+					{/if}
+					<h1 class="text-5xl font-semibold first-letter:uppercase">{entry.word}</h1>
+					<p class="text-purple-500 mt-4 font-semibold">{entry.phonetic}</p>
 
-				{#each entry.sourceUrls as source}
-					<div class="mt-5">
-						<hr />
-						<p class="font-light text-gray-800 dark:text-white mb-3">
-							Source <a
-								href={source}
-								target="_blank"
-								class="ml-10 underline text-purple-500 font-semibold">${source}</a
-							>
-						</p>
-					</div>
+					{#each entry.meanings as meanings}
+						<Customhr word={meanings.partOfSpeech} />
+						<div class="mt-8">
+							<h5 class="font-light text-gray-800 dark:text-white mb-3">Meaning</h5>
+							<ul class="list-inside list-disc ml-5 w-10/12 space-y-2">
+								{#each meanings.definitions as definitions}
+									<li class="text-clip">{definitions.definition}</li>
+								{/each}
+							</ul>
+
+							<p class="font-light text-gray-800 dark:text-white mb-3 mt-10">
+								Synonyms
+								{#if meanings.synonyms}
+									<span class="text-purple-500 ml-10 first-letter:uppercase font-semibold"
+										>{meanings.synonyms}</span
+									>
+								{/if}
+							</p>
+						</div>
+					{/each}
+
+					{#each entry.sourceUrls as source}
+						<div class="mt-5">
+							<hr />
+							<p class="font-light text-gray-800 dark:text-white mb-3">
+								Source <a
+									href={source}
+									target="_blank"
+									class="ml-10 underline text-purple-500 font-semibold">${source}</a
+								>
+							</p>
+						</div>
+					{/each}
 				{/each}
-			{/each}
-		{/if}
-	</div>
+			{/if}
+		</div>
+	{/if}
 </section>
 
 <style>

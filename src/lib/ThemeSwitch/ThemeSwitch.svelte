@@ -1,5 +1,5 @@
 <script lang="ts">
-	let darkMode = true;
+	let darkMode = false;
 
 	function handleSwitchDarkMode() {
 		darkMode = !darkMode;
@@ -25,7 +25,7 @@
 	}
 
 	#theme-toggle:not(:checked) + label {
-		@apply bg-amber-400;
+		@apply bg-amber-200;
 	}
 
 	#theme-toggle:checked + label {

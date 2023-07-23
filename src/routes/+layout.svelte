@@ -4,10 +4,15 @@
 </script>
 
 <section class="py-5">
-	<header class="w-5/6 mx-auto my-10 flex items-center justify-between">
-		<span class="material-symbols-outlined"> library_books </span>
-		<ThemeSwitch />
-	</header>
+	<nav class="text-center my-3">
+		<small
+			><a class="text-purple-800 font-semibold underline cursor-pointer" href="/register">Register,</a
+			> and keep track of your dictionary findings</small
+		>
+		<a class="bg-purple-500 text-white py-1 px-3 rounded-lg ml-2" href="/login">
+			Log in
+		</a>
+	</nav>
 	<main class="w-5/6 mx-auto">
 		<slot />
 	</main>
