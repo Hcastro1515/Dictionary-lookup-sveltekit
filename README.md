@@ -1,39 +1,21 @@
-# create-svelte
+# Dictionary Lookup svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This project is my own take on the dictionary challenge provided by FrontEndMentor [Dictionary-challenge]("https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL")
 
-## Creating a project
+## Get Started
 
-If you're seeing this, you've probably already done this step. Congrats!
+If you want to take a look at this project, start by cloning the repo
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+```
+    git clone https://github.com/Hcastro1515/Dictionary-lookup-sveltekit.git && cd ./Dictionary-lookup-sveltekit
 ```
 
-## Developing
+### Install Dependencies
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've clone the repo, install the dependencies using NPM
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```
+    npm install
 ```
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-# Dictionary-lookup-sveltekit
+That's it! have fun with it.

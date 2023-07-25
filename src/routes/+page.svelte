@@ -4,6 +4,7 @@
 	import type { AxiosResponse } from 'axios';
 	import { onMount } from 'svelte';
 	import Customhr from '../components/customhr.svelte';
+	import { addDictionaryHistory, getDictionaryHistory } from '$lib/db/searchHistory';
 
 	let word: string = '';
 	let dictionaryEntry: DictionaryEntry[] | null = null;
@@ -36,7 +37,9 @@
 
 			if (Array.isArray(responseData) && responseData.length > 0) {
 				dictionaryEntry = responseData;
+				addDictionaryHistory(dictionaryEntry);
 				window.localStorage.setItem('dictionaryEntry', JSON.stringify(dictionaryEntry));
+				window.localStorage.setItem('dictionaryHistory', JSON.stringify(getDictionaryHistory()));
 			} else {
 				dictionaryEntry = null;
 				error = 'No definition found for the word.';
@@ -73,7 +76,7 @@
 	});
 </script>
 
-<section>
+<section class="relative">
 	<header class=" mx-auto my-10 flex items-center justify-between">
 		<span class="material-symbols-outlined"> library_books </span>
 	</header>
